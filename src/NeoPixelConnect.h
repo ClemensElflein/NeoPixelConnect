@@ -45,15 +45,7 @@ public:
     /// @brief Constructor
     /// @param pinNumber: GPIO pin that controls the NeoPixel string.
     /// @param numberOfPixels: Number of pixels in the string
-    /// @param pio: pio selected - default = pio0. pio1 may be specified
-    /// @param sm: state machine selected. Default = 0
     NeoPixelConnect(byte pinNumber, uint16_t numberOfPixels);
-
-    /// @brief Constructor
-    /// @param pinNumber: GPIO pin that controls the NeoPixel string.
-    /// @param numberOfPixels: Number of pixels in the string
-    /// This constructor sets pio=pio0 and sm to 0
-    NeoPixelConnect(byte pinNumber, uint16_t numberOfPixels, PIO pio, uint sm);
 
     /// @brief Destructor
     virtual ~NeoPixelConnect(){};
@@ -96,11 +88,11 @@ private:
     // pio - 0 or 1
     PIO pixelPio;
 
-    // calculated program offset in memory
-    uint pixelOffset;
-
     // pio state machine to use
-    uint pixelSm;
+    int pixelSm;
+
+    // The pio program
+    PIOProgram pixelPioProgram;
 
     // number of pixels in the strip
     uint16_t actual_number_of_pixels;
@@ -110,6 +102,7 @@ private:
 
     // create a 32 bit value combining the 3 colors
     uint32_t urgb_u32(uint8_t r, uint8_t g, uint8_t b);
+
 };
 
 
